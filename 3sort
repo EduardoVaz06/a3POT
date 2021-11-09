@@ -1,0 +1,180 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main()
+{
+    int quantidade, i, valor, selecao, aux, j;
+    int menu;
+    
+    
+    printf("Qual a quantidade de numeros no vetor? ");
+    scanf("%d", &quantidade);
+    int vet_ord_bubble[quantidade];
+    int vet_ord_selec[quantidade];
+    int vet_ord_insert[quantidade];
+    int vet[quantidade];
+
+    printf("\nDeseja digitar os numeros ou gerar aleatorios?\n");
+    printf("1 - Escolher numeros\n2 - Numeros aleatorios\n");
+    scanf("%d", &selecao);
+    
+    if (selecao == 1)
+    {
+
+        for(i = 0; i < quantidade; i++)
+        {
+            printf("digite o numero: ");
+            scanf("%d", &valor);
+            vet[i] = valor;
+        }
+
+        for(i = 0; i < quantidade; i++)
+        {
+            printf("%d ", vet[i]);
+        }
+    }
+    else
+    {
+        printf("Serao gerados numeros aleatorios de 1 a 20 (para melhor organizacao\n");
+
+        int i;
+
+        for (i = 0; i < quantidade; i++)
+        {
+            vet[i] = (1 + rand() % 20);  
+            printf("%d ", vet[i]);
+        }  
+    }
+
+//menu
+    do
+{
+    printf("\nEscolha a opcao desejada: \n");
+    printf("1 - Selection Sort\n");
+    printf("2 - Bubble Sort\n");
+    printf("3 - Insertion Sort\n");
+    printf("4 - Sair\n");
+    scanf("%d", &menu);
+        switch(menu)
+        {
+ //1 CASO, SELECTION         
+        case 1:
+        system("cls");
+        printf("Selection Sort\n");
+
+        for(int i = 0; i < quantidade - 1; i++) {
+            int menor = i;
+            for(int j = i + 1; j < quantidade; j++) {
+                if (vet[j] < vet[menor]) menor = j;
+            }
+            int aux = vet[i];
+            vet[i] = vet[menor];
+            vet[menor] = aux;
+        }
+
+        printf("Imprimindo o novo vetor\n");
+        for(j = 0; j < quantidade; j++)
+        {
+            vet_ord_selec[i] = vet[j];
+            printf("%d ", vet_ord_selec[i]);
+        }
+
+        printf("\n");
+        break;
+//2 CASO, BUBBLE SORT
+        case 2:
+        system("cls");
+        printf("Bubble Sort\n");
+        
+        int contador = 0;
+
+        double time_spent2 = 0.0;
+ 
+        clock_t begin2 = clock();
+
+         for(i=quantidade-2; i>=0; i--)
+        {
+            for(j=0; j<=i; j++)
+            {
+                if(vet[j] > vet[j+1])
+                {
+                    aux = vet[j];
+                    vet[j] = vet[j+1];
+                    vet[j+1] = aux;
+                    contador = contador + 1;
+                }
+            }
+        }
+        printf("Imprimindo o novo vetor\n");
+        for(j = 0; j < quantidade; j++)
+        {
+            vet_ord_bubble[i] = vet[j];
+            printf("%d ", vet_ord_bubble[i]);
+        }
+
+        printf("\nNumero de acoes: %d\n", contador);
+        
+        clock_t end2 = clock();
+ 
+        time_spent2 += (double)(end2 - begin2) / CLOCKS_PER_SEC;
+ 
+        printf("The elapsed time is %f seconds", time_spent2);
+
+        printf("\n");
+        break;
+
+//3 CASO, INSERTION SORT
+        case 3:
+        system("cls");
+        printf("Insertion Sort\n");
+
+        int contador2 = 0;
+        double time_spent3 = 0.0;
+ 
+        clock_t begin3 = clock();
+
+         int i, j, tmp;
+  
+        for(i = 1; i < quantidade; i++)
+        {
+        tmp = vet[i];
+        for(j = i-1; j >= 0 && tmp < vet[j]; j--)
+        {
+        vet[j+1] = vet[j];
+        contador2 = contador2 + 1;
+        }
+        vet[j+1] = tmp;
+        }
+
+        printf("Imprimindo o novo vetor\n");
+        for(j = 0; j < quantidade; j++)
+        {
+            vet_ord_insert[i] = vet[j];
+            printf("%d ", vet_ord_insert[i]);
+        }
+
+        printf("\nNumero de acoes: %d\n", contador2);
+
+        clock_t end3 = clock();
+ 
+        time_spent3 += (double)(end3 - begin3) / CLOCKS_PER_SEC;
+ 
+        printf("The elapsed time is %f seconds", time_spent3);
+        break;
+//4 CASO, ENCERRAR PROGRAMA
+        case 4:
+        system("cls");
+        printf("Saindo");
+        break;
+
+        default:
+        system("cls");
+        printf("\nOpcao invalida\n");
+        break;
+        }
+}   while (menu != 4);
+
+    return 0;
+}
+
