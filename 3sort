@@ -7,7 +7,7 @@ int main()
     int quantidade, i, valor, selecao, aux, j;
     int menu;
     
-    
+    printf("Organizacao de vetor de numeros de 3 formas diferentes (menu para selecao de qual deseja utilizar\n");
     printf("Qual a quantidade de numeros no vetor? ");
     scanf("%d", &quantidade);
     int vet_ord_bubble[quantidade];
@@ -51,39 +51,15 @@ int main()
     do
 {
     printf("\nEscolha a opcao desejada: \n");
-    printf("1 - Selection Sort\n");
-    printf("2 - Bubble Sort\n");
-    printf("3 - Insertion Sort\n");
+    printf("1 - Bubble Sort\n");
+    printf("2 - Insertion Sort\n");
+    printf("3 - Selection Sort\n");
     printf("4 - Sair\n");
     scanf("%d", &menu);
         switch(menu)
         {
- //1 CASO, SELECTION         
+ //1 CASO, bubble         
         case 1:
-        system("cls");
-        printf("Selection Sort\n");
-
-        for(int i = 0; i < quantidade - 1; i++) {
-            int menor = i;
-            for(int j = i + 1; j < quantidade; j++) {
-                if (vet[j] < vet[menor]) menor = j;
-            }
-            int aux = vet[i];
-            vet[i] = vet[menor];
-            vet[menor] = aux;
-        }
-
-        printf("Imprimindo o novo vetor\n");
-        for(j = 0; j < quantidade; j++)
-        {
-            vet_ord_selec[i] = vet[j];
-            printf("%d ", vet_ord_selec[i]);
-        }
-
-        printf("\n");
-        break;
-//2 CASO, BUBBLE SORT
-        case 2:
         system("cls");
         printf("Bubble Sort\n");
         
@@ -123,9 +99,8 @@ int main()
 
         printf("\n");
         break;
-
-//3 CASO, INSERTION SORT
-        case 3:
+//2 CASO, insert
+        case 2:
         system("cls");
         printf("Insertion Sort\n");
 
@@ -161,6 +136,45 @@ int main()
         time_spent3 += (double)(end3 - begin3) / CLOCKS_PER_SEC;
  
         printf("The elapsed time is %f seconds", time_spent3);
+
+        printf("\n");
+        break;
+
+//3 CASO, select
+        case 3:
+        system("cls");
+        printf("Selection Sort\n");
+
+        int contador3 = 0;
+        double time_spent = 0.0;
+ 
+        clock_t begin = clock();
+
+        for(int i = 0; i < quantidade - 1; i++) {
+            int menor = i;
+            for(int j = i + 1; j < quantidade; j++) {
+                if (vet[j] < vet[menor]) menor = j;
+            }
+            int aux = vet[i];
+            vet[i] = vet[menor];
+            vet[menor] = aux;
+        }
+
+        printf("Imprimindo o novo vetor\n");
+        for(j = 0; j < quantidade; j++)
+        {
+            vet_ord_selec[i] = vet[j];
+            printf("%d ", vet_ord_selec[i]);
+        }
+
+        clock_t end = clock();
+ 
+        time_spent += (double)(end - begin) / CLOCKS_PER_SEC;
+ 
+        printf("The elapsed time is %f seconds", time_spent3);
+
+
+        printf("\n");
         break;
 //4 CASO, ENCERRAR PROGRAMA
         case 4:
